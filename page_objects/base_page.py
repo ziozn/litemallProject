@@ -14,7 +14,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class BasePage:
     _BASE_URL = "https://litemall.hogwarts.ceshiren.com/"
-    def __init__(self, driver:WebDriver = None):
+
+    def __init__(self, driver: WebDriver = None):
         if driver is None:
             self.driver = webdriver.Chrome()
             self.driver.implicitly_wait(10)
@@ -25,15 +26,15 @@ class BasePage:
             # 复用driver
             self.driver = driver
 
-    def do_click(self, by:By, locator:str):
+    def do_click(self, by: By, locator: str):
         """查找并点击元素"""
         self.driver.find_element(by, locator).click()
 
-    def do_send_keys(self, value, by:By, locator:str):
+    def do_send_keys(self, value, by: By, locator: str):
         """查找并输入元素"""
         self.driver.find_element(by, locator).send_keys(value)
 
-    def do_clear_send_keys(self, value, by:By, locator:str):
+    def do_clear_send_keys(self, value, by: By, locator: str):
         """先清空再输入元素"""
         element = self.driver.find_element(by, locator)
         element.clear()
@@ -47,4 +48,3 @@ class BasePage:
         """获取元素的文本"""
         elm = WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(element))
         return elm.text
-
